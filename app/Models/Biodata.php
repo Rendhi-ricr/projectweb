@@ -14,6 +14,8 @@ class Biodata extends Model
     protected $protectFields = true;
     protected $allowedFields = [
         'nik',
+        'nama',
+        'email',
         'jk',
         'kewarganegaraan',
         'alamat',
@@ -30,10 +32,19 @@ class Biodata extends Model
         'nama_ibu',
         'nik_ibu',
         'pekerjaan_ibu',
-        'prodi_1',
-        'prodi_2',
+        'pilihan_prodi1',
+        'pilihan_prodi2',
+        'status',
         'id_akun',
     ];
+
+    public function getAll()
+    {
+        return $this->select('tbl_biodata.*, tbl_akun.nama_lengkap, tbl_akun.email AS akun_email')
+            ->join('tbl_akun', 'tbl_akun.id_akun = tbl_biodata.id_akun', 'left')
+            ->findAll();
+    }
+
 
     public function data_biodata($id_biodata)
     {
