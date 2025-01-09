@@ -31,7 +31,7 @@ class Bayar extends BaseController
             'id_akun' => session()->get('id_akun'),
             'tanggal_bayar' => date('Y-m-d H:i:s'),
             'bukti_bayar' => $fileName,
-            'status_bayar' => 'Belum Dikonfirmasi',
+            'status_bayar' => 'Lunas',
             'metode_bayar' => $this->request->getPost('metode_bayar'),
             'jumlah_bayar' => 2000000
         ];

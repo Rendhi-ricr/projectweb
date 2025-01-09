@@ -4,16 +4,14 @@ namespace App\Controllers\admin;
 
 use App\Controllers\BaseController;
 use App\Models\Biodata;
-use App\Models\Akun;
 
 class Home extends BaseController
 {
-    protected $pendaftaranModel, $akun;
+    protected $pendaftaranModel;
 
     public function __construct()
     {
         $this->pendaftaranModel = new Biodata();
-        $this->akun = new Akun();
     }
 
     public function index()
@@ -24,30 +22,19 @@ class Home extends BaseController
         return view('admin/index', $data);
     }
 
-    public function tambah()
-    {
-        // Logika tambah data (implementasi belum diberikan)
-    }
-
     public function detail($id_biodata)
     {
-        $akun = $this->akun->findAll();
-        $pendaftaran = $this->pendaftaranModel->find($id_biodata);
+        $pendaftaran = $this->pendaftaranModel->getAll();
         $data = [
-            'pendaftaran' => $pendaftaran,
-            'akun' => $akun,
+            'pendaftaran' => array_filter($pendaftaran, function ($item) use ($id_biodata) {
+                return $item['id_biodata'] == $id_biodata;
+            })[0] ?? null,
         ];
+
+        if (!$data['pendaftaran']) {
+            return redirect()->to('admin/home')->with('error', 'Data tidak ditemukan.');
+        }
+
         return view('admin/detail', $data);
-    }
-
-    public function update($id)
-    {
-        // Logika update data (implementasi belum diberikan)
-    }
-
-    public function delete($id)
-    {
-        $this->pendaftaranModel->delete($id);
-        return redirect()->to('admin/home');
     }
 }

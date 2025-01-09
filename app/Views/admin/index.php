@@ -6,7 +6,7 @@
     <div class="header">
         <h4>Kelola Pendaftaran</h4>
     </div>
-    <a href="<?= base_url('admin/home/tambah') ?>" class="btn btn-success mb-3">Tambah Data</a>
+    <a href="<?= base_url('formulir') ?>" class="btn btn-success mb-3">Tambah Data</a>
     <table id="dataTable" class="table table-bordered">
         <thead>
             <tr>

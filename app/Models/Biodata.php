@@ -8,10 +8,6 @@ class Biodata extends Model
 {
     protected $table = 'tbl_biodata';
     protected $primaryKey = 'id_biodata';
-    protected $useAutoIncrement = true;
-    protected $returnType = 'array';
-    protected $useSoftDeletes = false;
-    protected $protectFields = true;
     protected $allowedFields = [
         'nik',
         'nama',
@@ -35,7 +31,7 @@ class Biodata extends Model
         'pilihan_prodi1',
         'pilihan_prodi2',
         'status',
-        'id_akun',
+        'id_akun'
     ];
 
     public function getAll()
@@ -44,7 +40,6 @@ class Biodata extends Model
             ->join('tbl_akun', 'tbl_akun.id_akun = tbl_biodata.id_akun', 'left')
             ->findAll();
     }
-
 
     public function data_biodata($id_biodata)
     {
